@@ -57,15 +57,13 @@ client.on('interactionCreate', async interaction => {
       .setColor('#0099ff')
       .setTitle('🎲 発表順が決まりました！')
       .setDescription(`**${voiceChannel.name}** のメンバー (${shuffledMembers.length}人)`)
-      .addFields(
-        shuffledMembers.map((username, index) => {
-          return {
-            name: `${index + 1}番目`,
-            value: username,
-            inline: true
-          };
-        })
-      )
+      for (let i = 0; i < shuffledMembers.length; i++) {
+        embed.addFields({
+          name: `${i + 1}番目`,
+          value: shuffledMembers[i],
+          inline: false // ここをfalseに変更
+        });
+      }
   
     await interaction.reply({ embeds: [embed] });
   }
